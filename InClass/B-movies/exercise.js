@@ -60,8 +60,78 @@ var movies = [
 
 // create showMovies function
 
+function showMovies() {
+  var allMoviesDiv = document.querySelector("#all-movies");
+  for (var i = 0; i < movies.length; i++) {
+    var movie = movies[i];
+    var pElement = document.createElement("p");
+    pElement.innerText = movie.title + "by" + movie.director;
+    allMoviesDiv.appendChild(pElement);
+  }
+}
+setTimeout(showMovies, 1000);
 
 // create a new movie object for your favorite movie
 
+var movie1 = {
+  title: "The Silence of the Lambs",
+  director: "Jonathan Demme",
+  type: "thriller",
+  haveWatched: true,
+};
+var movie2 = {
+  title: "Fight Club",
+  director: "David Fincher",
+  type: "drama/thriller",
+  haveWatched: true,
+};
 
 // create addMovies function
+
+function addMovie(newMovie) {
+  movies.push(newMovie);
+}
+
+//
+
+setTimeout(function () {
+  addMovie(movie2);
+  showMovies();
+}, 2000);
+
+//
+
+var saveButton = document.querySelector("#saveButton");
+saveButton.addEventListener("click", saveMovie);
+
+function saveMovie(event) {
+  console.log("Save movie");
+  var movieTitleInput = document.querySelector("#movieTitle");
+  var movieTitle = movieTitleInput.value;
+
+  var movieDirectorInput = document.querySelector("#movieDirector");
+  var movieDirector = movieDirectorinput.value;
+
+  var movieTypeInput = document.querySelector("#movieDirector");
+  var movieDirector = movieDirectorInput.value;
+
+  var movieTypeInput = document.querySelector("#movieType");
+  var movieType = movieTypeInput.value;
+
+  var movieWatchedInput = document.querySelector("#movieWatched");
+  var movieWatched = movieWatchedInput.checked;
+
+  if (movieTitle && movieDirector && movieType) {
+    var movie = {
+      title: movieTitle,
+      director: movieDirector,
+      type: movieType,
+      haveWatched: movieWatched,
+    };
+    console.log(movie);
+
+    addMovie(movie);
+    showMovies();
+  }
+  event.preventDefault();
+}
